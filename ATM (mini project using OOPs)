@@ -1,0 +1,188 @@
+#include<bits/stdc++.h>
+#include<conio.h>
+using namespace std;
+
+
+class ATM {
+	
+	private:
+		
+		long int AccountNo;
+		string Name;
+		int PIN;
+		double Balance;
+		string MobileNo;
+		
+	public:
+		
+		//this function is setting the data into the private member variable
+		void setsdata(long int accountno_a,string name_a,int pin_a , double balance_a , string mobileno_a)
+		{
+		AccountNo=accountno_a;
+		Name=	name_a;
+		PIN= pin_a;
+		Balance = balance_a;
+		MobileNo = mobileno_a;
+		}
+		
+		
+		long int getaccountno()
+		{
+			return AccountNo;
+		}
+		
+		int getPIN(){
+			return PIN;
+		}
+		
+		string getname()
+		{
+			return Name;
+		}
+		
+		double getbalance()
+		{
+			return Balance;
+		}
+		
+		string getmobileno(){
+			return MobileNo;
+		}
+		
+		void setmobile(string mob_prev, string mob_new){
+			if(mob_prev == MobileNo){
+			MobileNo = mob_new;
+			cout<< endl<< "sucessfully updated MobileNo"<<endl;
+			getch();	
+			}
+			else{
+				cout<<"Invalid  !!!! Old mobile no"<<endl;
+				getch();
+			}
+		}
+	
+	
+	void cashwithdraw(int amount_a)
+	{
+	   if(amount_a > 0 && amount_a < Balance){
+	   	Balance -= amount_a;
+	   	cout<<"Please collect your case"<<endl;
+	   	cout<<"available balance "<<Balance<<endl;
+	   	getch();
+	   }
+	   else
+	   {
+	   	cout<<"Invalid input or insufficiant Balance"<<endl;
+	   	getch();
+		   }	
+		
+	}
+	
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+int main()
+{
+	int choice = 0,enterPIN;
+	long int enterAccountNo;
+	
+	system("cls");
+	
+	
+	ATM user1;
+	user1.setsdata(1234567,"Vikash Kumar Verma",1111,45000.90,"9876543210");
+	
+	do
+	{
+		system("cls");
+		
+		
+		cout<<"*** Welcome to ATM ***"<<endl;
+		
+		cout<<"Enter youraccount no "<<endl;
+		
+		cin>>enterAccountNo;
+		
+		cout<<"Enter pin"<<endl;
+		
+		cin>>enterPIN;
+		
+		if(enterAccountNo == user1.getaccountno() && user1.getPIN())
+		{
+			do
+			{
+				int amount =0;
+				string oldmobilrno,newmobileno;
+				system("cls");
+				
+				
+				cout<<"*** Welcome to ATM ***"<<endl;
+				cout<<"Select option "<<endl;
+				cout<<"1.Check Balance"<<endl;
+				cout<<"2.Cash withdraw"<<endl;
+				cout<<"3.Show userdetails"<<endl;
+				cout<<"4.Update Mobileno"<<endl;
+				cout<<"5.exit"<<endl;
+				
+				
+				
+				cin>>choice;
+				
+				switch(choice)
+				{
+					case 1 :
+						cout<<"Your balance is :"<<user1.getbalance()<<endl;
+						
+						getch();
+						break;
+						
+					case 2 :
+						cout<<"Enter the amount  :"<<endl;
+						cin>>amount;
+						user1.cashwithdraw(amount);
+						getch();
+						break;
+						
+					case 3 :
+						cout<<"*** user details are *** :"<<endl;
+						cout<<"->Name"<< " " <<user1.getaccountno()<<endl;
+						cout<<"->Balance "<< " " <<user1.getbalance()<<endl;
+						cout<<"->MobileNO"<< " " <<user1.getmobileno()<<endl;
+						getch();
+						break;
+						
+					case 4 :
+						cout<<"enter Old mobileno :"<<endl;
+						
+						cin>>oldmobilrno;
+						
+					    cout<<"enter new Mobile no"<<endl;
+					    
+					    cin>>newmobileno;
+					    
+						user1.setmobile(oldmobilrno,newmobileno);
+						
+						getch();
+						break;
+						
+					case 5:
+					    exit(0);
+					      
+					default :
+					        cout<<"Enter valid Data !!! "<<endl;	
+				}
+				
+			}while(1);
+		}
+		
+		else
+		{
+			cout<<"User Details are Invalid !!!"<<endl;
+			getch();
+		}
+		
+	}while(1);
+	
+return 0;
+	
+}
